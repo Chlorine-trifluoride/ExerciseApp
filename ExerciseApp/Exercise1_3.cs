@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ExerciseApp
 {
-    class Exercise1_3
+    class Exercise1_3 : IExercise
     {
         class Log
         {
@@ -30,7 +30,7 @@ namespace ExerciseApp
             }
         }
 
-        public static void Run()
+        public void Run()
         {
             Console.WriteLine("Welcome to a note echoer.");
             Console.WriteLine("Reply q, quit or exit to go back to main menu.");
@@ -45,7 +45,7 @@ namespace ExerciseApp
             } while (!exit);
         }
 
-        private static bool DoNotesExerc()
+        private bool DoNotesExerc()
         {
             Console.WriteLine("Please enter a note...");
             string input = "";
@@ -65,7 +65,7 @@ namespace ExerciseApp
             return true;
         }
 
-        private static bool CheckForExitString(string input)
+        private bool CheckForExitString(string input)
         {
             switch (input.ToLower())
             {

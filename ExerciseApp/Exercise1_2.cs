@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ExerciseApp
 {
-    class Exercise1_2
+    class Exercise1_2 : IExercise
     {
         private enum Weekday
         {
@@ -19,7 +19,7 @@ namespace ExerciseApp
             SUNDAY
         }
 
-        public static void Run()
+        public void Run()
         {
             Console.WriteLine("Welcome to weekend calculator.");
             Console.WriteLine("Reply q, quit or exit to go back to main menu.");
@@ -32,7 +32,7 @@ namespace ExerciseApp
             } while (!exit);
         }
 
-        private static bool DoWeekdayPrompt()
+        private bool DoWeekdayPrompt()
         {
             Weekday day = Weekday.UNDEFINED;
             do
@@ -61,7 +61,7 @@ namespace ExerciseApp
             return false;
         }
 
-        private static (bool, Weekday) ValidateInput(string input)
+        private (bool, Weekday) ValidateInput(string input)
         {
             if (!Enum.IsDefined(typeof(Weekday), input))
                 return (false, Weekday.UNDEFINED);
@@ -70,7 +70,7 @@ namespace ExerciseApp
             return (true, day);
         }
 
-        private static int DaysUntilDay(Weekday currentDay, Weekday targetDay)
+        private int DaysUntilDay(Weekday currentDay, Weekday targetDay)
         {
             int daysRemaining = targetDay - currentDay;
 
@@ -83,7 +83,7 @@ namespace ExerciseApp
             return daysRemaining;
         }
 
-        private static bool CheckForExitString(string input)
+        private bool CheckForExitString(string input)
         {
             switch (input.ToLower())
             {

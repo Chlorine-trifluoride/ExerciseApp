@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ExerciseApp
 {
-    class Exercise1_1
+    class Exercise1_1 : IExercise
     {
-        public static void Run()
+        public void Run()
         {
             double d = (double)(1 << 2);
             double e = (double)(1 << 4);
@@ -27,7 +27,7 @@ namespace ExerciseApp
             Console.ReadKey(false);
         }
 
-        private static void LogWithTag<T>(string TAG, T value)
+        private void LogWithTag<T>(string TAG, T value)
         {
             Console.WriteLine($"{TAG.ToUpper()} { value.ToString()}");
         }

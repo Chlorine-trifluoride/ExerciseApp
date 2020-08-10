@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ExerciseApp
 {
-    class Exercise2_3
+    class Exercise2_3 : IExercise
     {
         private enum Commands
         {
@@ -15,9 +15,9 @@ namespace ExerciseApp
             del
         }
 
-        private static List<string> notes = new List<string>();
+        private List<string> notes = new List<string>();
 
-        public static void Run()
+        public void Run()
         {
             ListUserCommands();
 
@@ -30,7 +30,7 @@ namespace ExerciseApp
             } while (!exit);
         }
 
-        private static void ListUserCommands()
+        private void ListUserCommands()
         {
             Console.WriteLine("[Command] \t [Description]");
             Console.WriteLine("quit \t\t exit to main menu");
@@ -39,7 +39,7 @@ namespace ExerciseApp
             Console.WriteLine("del \t\t remove a note with specified index");
         }
 
-        private static void BadSyntax(Commands command)
+        private void BadSyntax(Commands command)
         {
             switch (command)
             {
@@ -57,7 +57,7 @@ namespace ExerciseApp
             }
         }
 
-        private static bool GetUserInput()
+        private bool GetUserInput()
         {
             bool extraParams = false;
             string command, text = "";
@@ -122,7 +122,7 @@ namespace ExerciseApp
             return true;
         }
 
-        private static void RemoveNote(int index)
+        private void RemoveNote(int index)
         {
             if (index < notes.Count)
             {
@@ -135,12 +135,12 @@ namespace ExerciseApp
             // TODO: error
         }
 
-        private static void AddNewNote(string note)
+        private void AddNewNote(string note)
         {
             notes.Add(note);
         }
 
-        private static void PrintListOfNotes()
+        private void PrintListOfNotes()
         {
             for (int i = 0; i < notes.Count; i++)
             {
@@ -148,7 +148,7 @@ namespace ExerciseApp
             }
         }
 
-        private static string GetStringOfMaxLen(string text, int len)
+        private string GetStringOfMaxLen(string text, int len)
         {
             return text.Substring(0, Math.Min(len, text.Length));
         }

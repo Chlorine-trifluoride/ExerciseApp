@@ -4,12 +4,12 @@ using System.Text;
 
 namespace ExerciseApp
 {
-    class Exercise2_2
+    class Exercise2_2 : IExercise
     {
         const int MAX_VALUE = 40;
 
         // This is very hacky
-        public static void Run()
+        public void Run()
         {
             for (int i = 2; i <= MAX_VALUE; i++)
             {
