@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace ExerciseApp
 {
@@ -41,23 +42,23 @@ namespace ExerciseApp
             switch (keyInfo.Key)
             {
                 case ConsoleKey.A:
-                    RunExercise(Exercise1_1.Run);
+                    RunExercise<Exercise1_1>();
                     break;
 
                 case ConsoleKey.B:
-                    RunExercise(Exercise1_2.Run);
+                    RunExercise<Exercise1_2>();
                     break;
 
                 case ConsoleKey.C:
-                    RunExercise(Exercise1_3.Run);
+                    RunExercise<Exercise1_3>();
                     break;
 
                 case ConsoleKey.D:
-                    RunExercise(Exercise2_2.Run);
+                    RunExercise<Exercise2_2>();
                     break;
 
                 case ConsoleKey.E:
-                    RunExercise(Exercise2_3.Run);
+                    RunExercise<Exercise2_3>();
                     break;
 
                 case ConsoleKey.Q:
@@ -78,8 +79,14 @@ namespace ExerciseApp
         // Helper function for running the tasks and clearning the screen
         static void RunExercise(Action action)
         {
-            Console.Clear();
             action.Invoke();
+        }
+
+        // wub, generics
+        static void RunExercise<T>() where T : IExercise, new()
+        {
+            Console.Clear();
+            new T().Run();
         }
 
         static void Main(string[] args)
