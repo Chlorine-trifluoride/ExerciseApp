@@ -6,6 +6,15 @@ namespace ExerciseApp
 {
     class Exercise2_3
     {
+        private enum Commands
+        {
+            unknown = 0,
+            quit,
+            list,
+            add,
+            del
+        }
+
         private static List<string> notes = new List<string>();
 
         public static void Run()
@@ -23,11 +32,29 @@ namespace ExerciseApp
 
         private static void ListUserCommands()
         {
-            Console.WriteLine("[Command] \t\t [Description]");
+            Console.WriteLine("[Command] \t [Description]");
             Console.WriteLine("quit \t\t exit to main menu");
             Console.WriteLine("list \t\t list all saved notes");
             Console.WriteLine("add \t\t add a new note");
             Console.WriteLine("del \t\t remove a note with specified index");
+        }
+
+        private static void BadSyntax(Commands command)
+        {
+            switch (command)
+            {
+                case Commands.add:
+                    Console.WriteLine("Syntax: add <text to add>");
+                    break;
+
+                case Commands.del:
+                    Console.WriteLine("Syntax: del <id>");
+                    break;
+
+                default:
+                    Console.WriteLine("[WARN]Invalid syntax");
+                    break;
+            }
         }
 
         private static bool GetUserInput()
@@ -56,19 +83,29 @@ namespace ExerciseApp
 
                 case "add":
                     if (!extraParams)
+                    {
+                        BadSyntax(Commands.add);
                         break;
+                    }
 
                     string note = text;
                     AddNewNote(note);
                     break;
 
-                case "del":
+                    case "del":
                     if (!extraParams)
+                    {
+                        BadSyntax(Commands.del);
                         break;
+                    }
 
                     int i;
                     if (!int.TryParse(text, out i))
+                    {
+                        BadSyntax(Commands.del);
                         break;
+                    }
+
                     RemoveNote(i);
                     break;
 
@@ -78,7 +115,7 @@ namespace ExerciseApp
                     return false;
 
                 default:
-                    Console.WriteLine("Invalid input");
+                    Console.WriteLine("Invalid command");
                     break;
             }
 
@@ -88,7 +125,12 @@ namespace ExerciseApp
         private static void RemoveNote(int index)
         {
             if (index < notes.Count)
+            {
                 notes.RemoveAt(index);
+                Console.WriteLine($"Removed note at index {index}");
+            }
+            else
+                BadSyntax(Commands.del);
 
             // TODO: error
         }
